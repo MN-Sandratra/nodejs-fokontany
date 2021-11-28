@@ -2,8 +2,13 @@ require('dotenv/config')
 
 const express = require('express')
 const mongoose = require('mongoose')
+
 const userRoute = require('./routes/user.route')
 const fokontanyRoute = require('./routes/fokontany.route')
+const communeRoute = require('./routes/commune.route')
+const districtRoute = require('./routes/district.route')
+const regionRoute = require('./routes/region.route')
+const provinceRoute = require('./routes/province.route')
 
 const PORT = 3030;
 
@@ -23,6 +28,10 @@ mongoose.connect(process.env.CONNECTION_DB, {useNewUrlParser:true, useUnifiedTop
 
         server.use('/api/users', userRoute);
         server.use('/api/fokontany', fokontanyRoute);
+        server.use('/api/communes', communeRoute);
+        server.use('/api/districts', districtRoute);
+        server.use('/api/regions', regionRoute);
+        server.use('/api/provinces', provinceRoute);
         
         server.get('/',(req,res)=>{
             res.send('Hello world')
