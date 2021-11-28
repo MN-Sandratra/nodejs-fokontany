@@ -1,7 +1,4 @@
-import {Schema,model} from 'mongoose';
-
-const SEX_CHOICES = ['Homme', 'Femme']
-const MARITAL_STATUS_CHOICES = ['Célibataire', 'Marié.e', 'Divorcé.e', 'Veuf.ve']
+import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema(
     {
@@ -10,16 +7,13 @@ const userSchema = new Schema(
         phone: String,
         email: String,
         address: String,
-        fokontany: String,
+        fokontany: {
+            type: Number,
+            ref: 'Fokontany'
+        },
         cin: String,
-        sex: {
-            type: String,
-            // enum: SEX_CHOICES
-        },
-        maritalStatus: {
-            type: String,
-            // enum: MARITAL_STATUS_CHOICES
-        },
+        sex: String,
+        maritalStatus: String,
         username: {
             type: String,
             required: true,
