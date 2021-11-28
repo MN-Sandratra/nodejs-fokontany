@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        let q = req.query.q
-        const fokontanys = await Fokontany.find( { "libellé": { "$regex": q, "$options": "i" } })
+        let q = req.query.q ? req.query.q : "";
+        const fokontanys = await Fokontany.find( { "libellé": { "$regex": q, "$options": "i" } }).limit(10);
         res.json(fokontanys)
     } catch (err) {
         res.json({ message : err })
