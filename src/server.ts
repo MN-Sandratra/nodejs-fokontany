@@ -1,4 +1,5 @@
 import express from 'express'
+
 const mongoose = require('mongoose')
 require('dotenv/config')
 
@@ -6,6 +7,7 @@ const server=express();
 const port=3030;
 
 const userRoute = require('./routes/user.route')
+const fokontanyRoute = require('./routes/fokontany.route')
 
 server.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,7 +19,8 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }))
 
 //middleware route
-server.use('/api/users',userRoute);
+server.use('/api/users', userRoute);
+server.use('/api/fokontany', fokontanyRoute);
 
 server.get('/',(req,res)=>{
     res.send('Hello world')
