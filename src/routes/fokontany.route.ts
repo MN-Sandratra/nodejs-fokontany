@@ -1,22 +1,30 @@
 import express from 'express'
-import { Fokontany } from '../models/Fokontany';
+import fokontany from '../data/fokontany';
 
 const router = express.Router();
+const dataset = fokontany;
 
 router.get('/', async (req, res) => {
     try {
-        let q = req.query.q ? req.query.q : "";
-        const fokontanys = await Fokontany.find( { "libellé": { "$regex": q, "$options": "i" } }).limit(10);
-        res.json(fokontanys)
+        let q = req.query.q ? req.query.q.toString() : "";
+        const dataList = dataset.filter(function (data){
+            if (this.count < 10 && data.libellé.startsWith(q.toUpperCase())) {
+                this.count++;  
+                return true;
+            }
+            return false; 
+        }, {count: 0});
+        res.json(dataList)
     } catch (err) {
+        console.log(dataset)
         res.json({ message : err })
     }
 });
 
 router.get('/:id', async (req, res) => {
     try {
-        const fokontanys = await Fokontany.findById(req.params.id)
-        res.json(fokontanys)
+        const data = dataset.find((f) => f._id === parseInt(req.params.id))
+        res.json(data)
     } catch (err) {
         res.json({ message : err })
     }
