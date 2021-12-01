@@ -1,19 +1,14 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 
 const userSchema = new Schema(
     {
-        lastname: String,
-        firstname: String,
         phone: String,
         email: String,
-        address: String,
-        fokontany: {
-            type: Number,
-            ref: 'Fokontany'
+        isAdmin: Boolean,
+        person : {
+            type: Types.ObjectId,
+            ref: 'Person'
         },
-        cin: String,
-        sex: String,
-        maritalStatus: String,
         username: {
             type: String,
             required: true,
