@@ -9,6 +9,10 @@ const communeRoute = require('./routes/commune.route')
 const districtRoute = require('./routes/district.route')
 const regionRoute = require('./routes/region.route')
 const provinceRoute = require('./routes/province.route')
+const fktCardRoute = require('./routes/fktCard.route')
+const contributionRoute = require('./routes/contribution.route')
+const personRoute = require('./routes/person.route')
+const socialAidRoute = require('./routes/socialAid.route')
 
 const PORT = 3030;
 
@@ -32,6 +36,10 @@ mongoose.connect(process.env.CONNECTION_DB, {useNewUrlParser:true, useUnifiedTop
         server.use('/api/districts', districtRoute);
         server.use('/api/regions', regionRoute);
         server.use('/api/provinces', provinceRoute);
+        server.use('/api/fktCard', fktCardRoute);
+        server.use('/api/contribution', contributionRoute);
+        server.use('/api/socialAid', socialAidRoute);
+        server.use('/api/person', personRoute);
         
         server.get('/',(req,res)=>{
             res.send('Hello world')
